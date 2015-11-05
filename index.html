@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="files/style.css">
+    <style type="text/css">
+
+    </style>
+  </head>
+  <body>
+    <h3>
+      Radio yourself!
+    </h3>
+    <div class="image">
+<!--        <img id="target" src="files/kirsten.jpg" width="300"><br> -->
+        <input type="file" id="files" />
+        <output id="list"></output>
+        <script>
+          document.getElementById('files').addEventListener('change', handleFileSelect, false);
+          function handleFileSelect(evt) {
+            var files = evt.target.files;
+            var f = files[0];
+            var reader = new FileReader();
+             
+              reader.onload = (function(theFile) {
+                    return function(e) {
+                      document.getElementById('list').innerHTML = ['<img data-pixelate data-value="0.15" data-reveal="false" id="target" src="', e.target.result,'" width="300" />'].join('');
+                    var target = document.getElementById('target');
+                    GradientMaps.applyGradientMap(target, "black,white");
+                    };
+              })(f);
+               
+              reader.readAsDataURL(f);
+            }
+        </script>
+        <script type="text/javascript" src="files/gradientmaps.min.js"></script>
+        <script type="text/javascript" src="files/pixelate.js"></script>
+        <input class="button" type="button" onclick="pixel()" value="Add Realism"></input><br>
+    </div>
+    <div class="flavours">
+      <form>
+        <label for="colorGradient">Flavour</label><br>
+        <img id="greyscale_grad" src="files/tinygradient.jpg">
+        <input class="button" type="button" onclick="greyscale()" value="Default"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_invert.png" width="150" height="28">
+        <input class="button" type="button" onclick="invertgreyscale()" value="Invert Greyscale"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_rainbow.png" width="150" height="28">
+        <input class="button" type="button" onclick="standard()" value="Rainbow"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_mirp.png" width="150" height="28">
+        <input class="button" type="button" onclick="mirp()" value="mirp"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_mousse.png" width="150" height="28">
+        <input class="button" type="button" onclick="mousse()" value="Mousse"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_smooth.png" width="150" height="28">
+        <input class="button" type="button" onclick="smooth()" value="Smooth"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_ronekers.png" width="150" height="28">
+        <input class="button" type="button" onclick="ronekers()" value="ronekers"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_mutant.png" width="150" height="28">
+        <input class="button" type="button" onclick="mutant()" value="Mutant"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_spring.png" width="150" height="28">
+        <input class="button" type="button" onclick="spring()" value="Spring"></input><br>
+        <img id="rainbow_grad" src="files/tinygradients/tinygradient_heat.png" width="150" height="28">
+        <input class="button" type="button" onclick="heat()" value="Heat"></input><br>
+      </form>
+    </div>
+    <script>
+        function greyscale() {
+            gradient = "black,white";
+            colorize();
+        }
+        function invertgreyscale() {
+            gradient = "white,black";
+            colorize();
+        }
+        function standard() {
+            gradient = "red,yellow,green,cyan,violet";
+            colorize();
+        }
+        function mirp() {
+            gradient = "#001cff,#00aeff,#00f9ff,#00ffa6,#00ff1c,#caff00,#ffff00,#ffa600,#ff0000,#ff0088,#ff00f6";
+            colorize();
+        }
+        function mousse() {
+            gradient = "#000000,#000033,#000066,#000088,#330088,#660088,#880088,#bb0022,#dd0000,#ff0000,#ffff55,#ffffd3,#1400ff";
+            colorize();
+        }
+        function smooth() {
+            gradient = "#0900f6,#680097,#c2003d,#ff0d00,#fe4400,#fd7b00,#fca900,#fbc100,#fadf00,#c7b700,#615a00,#000000";
+            colorize();
+        }
+        function ronekers() {
+            gradient = "#323232,#79009b,#0000c8,#5fa7ec,#009100,#00f600,#ffff00,#ffb100,#ff0000,#ffffff";
+            colorize();
+        }
+        function mutant() {
+            gradient = "#0fff00,#5fff00,#b7ff00,#ffff0f,#ffff63,#ffffb2,#fffeff,#ffa6ff,#ff55ff,#fc00ff,#a800ff,#a800ff";
+            colorize();
+        }
+        function spring() {
+            gradient = "#000600,#002f00,#005900,#078500,#2fad00,#59d700,#85ff06,#afff2f,#d9ff59,#ffff85,#ffffab,#ffffd5";
+            colorize();
+        }
+        function heat() {
+            gradient = "#020000,#431600,#822b00,#c24100,#ff5600,#ff6e00,#ff9600,#ffac15,#ffc154,#ffd796,#ffebd1,#ffffff";
+            colorize();
+        }
+        function pixel() {
+            var target = document.getElementById('target');
+            target.pixelate({value: "0.05", reveal: false});
+            
+        }
+        function colorize() {
+            var target = document.getElementById('target');
+            var newimage = GradientMaps.applyGradientMap(target, gradient);
+        }
+    </script>    
+ 
+</body></html>
